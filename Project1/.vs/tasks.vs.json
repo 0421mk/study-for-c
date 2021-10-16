@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-HelloWorld (2)",
+      "appliesTo": "HelloWorld (2).c",
+      "type": "launch"
+    }
+  ]
+}
