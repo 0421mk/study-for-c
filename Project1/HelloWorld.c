@@ -1,85 +1,28 @@
 #include <stdio.h>
 
-// 가장 큰수 찾는 함수
-/*
-int main()
-{
-	int input1, input2, input3;
-
-	scanf_s("%d", &input1);
-	scanf_s("%d", &input2);
-	scanf_s("%d", &input3);
-
-	int result;
-	result = returnMax(input1, input2, input3);
-
-	printf("%d", result);
-
-	return 0;
- }
-
-int returnMax(int a, int b, int c) {
-	int d;
-	if (a >= b) {
-		d = a;
-	}
-	else {
-		d = b;
-	}
-
-	if (d >= c) {
-		return d;
-	}
-	else {
-		return c;
-	}
-}
-*/
-
-// main 함수에서 CelToFah 함수를 사용하려면 이처럼 위에 따로 선언을 해줘야 합니다.
-// 섭씨 화씨 문제
-/*
-double CelToFah(double cel);
-
-int main()
-{
-	double input = 0;
-
-	scanf_s("%lf", &input);
-
-	double result;
-	
-	result = CelToFah(input);
-
-	printf("%lf", result);
-
-	return 0;
-}
-
-double CelToFah(double cel) {
-	double result = 1.8 * 8 + (double)32;
-	return result;
-}
-*/
-
-//피보나치 수열 출력 문제
+// 모든 경우의 수를 다 확인합니다.
 int main() {
-	int number1 = 0;
-	int number2 = 1;
-	int result;
-	int input;
+	int cream;
+	int shrimp;
+	int cola;
 
-	scanf_s("%d", &input);
+	int price = 3500;
 
-	printf("%d", number1);
-	printf("%d", number2);
-
-	for (int i = 0; i < input - 2; i++) {
-		result = number1 + number2;
-		number1 = number2;
-		number2 = result;
-
-		printf("%d", result);
+	for (cream = 500; cream < price; cream += 500) {
+		printf("크림빵 : %d\n", cream);
+		for (shrimp = 700; shrimp < price; shrimp += 700) {
+			printf("새우 : %d\n", shrimp);
+			for (cola = 400; cola < price; cola += 400) {
+				printf("콜라 : %d\n", cola);
+				if (cream + shrimp + cola == price) {
+					printf("크림빵 %d, 새우깡 %d, 콜라 %d개", cream / 500, shrimp / 700, cola / 400);
+				}
+				else {
+					printf("금액이 맞지 않습니다.");
+					continue;
+				}
+			}
+		}
 	}
 
 	return 0;
