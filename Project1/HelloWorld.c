@@ -2,38 +2,36 @@
 
 int main()
 {
-	//문제1 : 두 수를 입력받아서 첫 수부터 두번째 수까지의 합
+	// 2단 2X2, 4단 4X4, 6단 6X6까지 출력하는 구구단 문제
 	/*
-	int input1 = 0;
-	int input2 = 0;
-	int total = 0;
-
-	scanf_s("%d", &input1);
-	scanf_s("%d", &input2);
-
-	while (input1 <= input2) {
-		total += input1;
-		input1++;
+	for (int i = 2; i <= 9; i++) {
+		for (int j = 1; j <= i; j++) {
+			if (i % 2 != 0) {
+				continue;
+			}
+			printf("%d * %d = %d\n", i, j, i * j);
+		}
 	}
-
-	printf("%d", total);
-
-	return 0;
 	*/
-	
-	// 팩토리얼 구현
-	int input = 0;
-	int result = 1;
-	int i = 1;
 
-	scanf_s("%d", &input);
+	// AZ + ZA == 99를 만족하는 ZA 찾기
+	int A = 0;
+	int Z = 0;
+	int AZ = 0;
+	int ZA = 0;
+	for (int i = 0; i < 100; i++) {
+		for (int j = 0; j < 100; j++) {
+			A = i * 10;
+			Z = j;
+			AZ = A + Z;
 
-	while (i <= input) {
-		result *= i;
-		i++;
+			Z = j * 10;
+			A = i;
+			ZA = Z + A;
+
+			if (AZ + ZA == 99) {
+				printf("AZ = %d, ZA = %d\n", AZ, ZA);
+			}
+		}
 	}
-
-	printf("%d", result);
-
-	return 0;
 }
