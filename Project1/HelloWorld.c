@@ -1,29 +1,21 @@
 #include <stdio.h>
-int two(int n);
+int recursive(int n);
 // 모든 경우의 수를 다 확인합니다.
 int main() {
 	int input;
 
 	scanf_s("%d", &input);
 
-	int result = 0;
-	while (1) {
-		result++;
-		if (two(result) > input) {
-			break;
-		}
-	}
-
-	printf("%d", result - 1);
+	printf("%d", recursive(input));
 	
 	return 0;
 }
 
-int two(int n) {
-	int result = 1;
-	for (int i = 0; i < n; i++) {
-		result *= 2;
+int recursive(int n) {
+
+	if (n == 1) {
+		return 1;
 	}
 
-	return result;
+	return n * recursive(n-1);
 }
