@@ -1,15 +1,29 @@
 #include <stdio.h>
-
+int two(int n);
 // 모든 경우의 수를 다 확인합니다.
 int main() {
 	int input;
+
 	scanf_s("%d", &input);
 
-	int hour = input / 3600;
-	int minute = input % 3600 / 60;
-	int second = (input % 3600) % 60;
+	int result = 0;
+	while (1) {
+		result++;
+		if (two(result) > input) {
+			break;
+		}
+	}
 
-	printf("h:%d, m:%d, s:%d", hour, minute, second);
+	printf("%d", result - 1);
 	
 	return 0;
+}
+
+int two(int n) {
+	int result = 1;
+	for (int i = 0; i < n; i++) {
+		result *= 2;
+	}
+
+	return result;
 }
