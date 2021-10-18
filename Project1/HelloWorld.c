@@ -1,42 +1,25 @@
 #include <stdio.h>
 
 int main() {
-	char input[100];
-	int size = 0;
-	scanf_s("%s", &input, 100);
-	int check = 0;
-
-	while (input[size] != 0) {
-		size++;
+	char input[7];
+	int size = 7;
+	for (int i = 0; i < size; i++) {
+		scanf_s("%d", &input[i]);
 	}
 
-	int start = 0;
-	int center = size / 2;
-	int end = size;
-
-	if (size % 2 == 1) {
-		center++;
-	}
-
-	for (int i = 0; i < center; i++) {
-		if (input[start] == input[end - 1]) {
-			check = 1;
+	for (int j = 0; j < 7; j++) {
+		for (int i = size - 1; i > j; i--) {
+			if (input[i] > input[i - 1]) {
+				int temp = input[i];
+				input[i] = input[i + -1];
+				input[i + -1] = temp;
+			}
 		}
-		else {
-			check = 0;
-			break;
-		}
-
-		start++;
-		end--;
 	}
-
-	if (check == 1) {
-		printf("회문입니다.");
+	
+	for (int i = 0; i < 7; i++) {
+		printf("%d ", input[i]);
 	}
-	else {
-		printf("회문이 아닙니다.");
-	}
-
+	
 	return 0;
 }
