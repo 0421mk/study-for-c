@@ -1,48 +1,41 @@
 #include <stdio.h>
 
-// 배열에서 홀수면 앞, 짝수면 거꾸로 뒤로 출력
 int main() {
-	int input;
-	int arr1[10];
-	int arr2[10];
-	int result[10];
-	int j = 0;
-	int k = 0;
-	int arrLen = 0;
-	int r = 0;
+	char input[100];
+	int size = 0;
+	scanf_s("%s", &input, 100);
+	int check = 0;
 
-	for (int i = 0; i < 10; i++) {
-		scanf_s("%d", &input);
+	while (input[size] != 0) {
+		size++;
+	}
 
-		if (input % 2 == 1) {
-			arr1[j] = input;
-			j++;
+	int start = 0;
+	int center = size / 2;
+	int end = size;
+
+	if (size % 2 == 1) {
+		center++;
+	}
+
+	for (int i = 0; i < center; i++) {
+		if (input[start] == input[end - 1]) {
+			check = 1;
 		}
 		else {
-			arr2[k] = input;
-			k++;
+			check = 0;
+			break;
 		}
+
+		start++;
+		end--;
 	}
 
-	while (arrLen < j) {
-		result[r] = arr1[arrLen];
-		arrLen++;
-		r++;
+	if (check == 1) {
+		printf("회문입니다.");
 	}
-
-	printf("\n");
-	arrLen = k - 1;
-
-	while (arrLen >= 0) {
-		result[r] = arr2[arrLen];
-		r++;
-		arrLen--;
-	}
-
-	printf("배열 요소의 출력 : ");
-
-	for (int i = 0; i < r; i++) {
-		printf("%d ", result[i]);
+	else {
+		printf("회문이 아닙니다.");
 	}
 
 	return 0;
