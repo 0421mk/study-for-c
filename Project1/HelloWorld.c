@@ -1,72 +1,49 @@
 #include <stdio.h>
 
-// 배열로 문자열 출력
+// 포인터로 직접 변수 접근 하는 함수 구현
 /*
 int main() {
-	char str[] = { 'G', 'o', 'o', 'd', ' ', 't', 'i','m','e' };
-	
-	int arrLen = sizeof(str) / sizeof(char);
+	int num = 3;
 
-	for (int i = 0; i < arrLen; i++) {
-		printf("%c\n", str[i]);
-	}
+	int result1 = SquareByValue(num);
+	int result2 = SquareByReference(&num);
+	
+	printf("result1 : %d, result2 = %d\n", result1, result2);
+	printf("num : %d", num);
 
 	return 0;
 }
-*/
 
-// 문자열 뒤집어서 출력
-/*
-int main() {
-	char input[100];
-	char input2[100];
-	int len = 0;
+int SquareByValue(int num) {
+	return num * num;
+}
 
-	// 예외가 생길 수 있으므로 입력시 sizeof(char) * 사이즈 꼭 해줘야한다.
-	scanf_s("%s", input, sizeof(char)*100);
-	
-	while (input[len] != 0) {
-		len++;
-	}
-
-	int j = 0;
-
-	for (int i = len - 1; i >= 0; i--) {
-		input2[j] = input[i];
-		j++;
-	}
-
-	input2[len] = 0;
-	
-
-	for (int i = 0; i < len; i++) {
-		printf("%c", input2[i]);
-	}
-
-	return 0;
+int SquareByReference(int* num) {
+	*num = (*num) * (*num);
+	return *num;
 }
 */
 
-// 입력받은 영문자 중 가장 큰 아스키코드 정수 값
+// 세 변수에 저장된 값을 바꾸는 함수 구현
+void Swap3(int* num1, int* num2, int* num3);
+
 int main() {
-	char input[100];
-	int len = 0;
-	char max = 0;
+	int num1 = 3;
+	int num2 = 6;
+	int num3 = 9;
 
-	// 예외가 생길 수 있으므로 입력시 sizeof(char) * 사이즈 꼭 해줘야한다.
-	scanf_s("%s", input, sizeof(char) * 100);
+	Swap3(&num1, &num2, &num3);
 
-	while (input[len] != 0) {
-		len++;
-	}
-
-	for (int i = 0; i < len; i++) {
-		if (max < input[i]) {
-			max = input[i];
-		}
-	}
-	
-	printf("%c", max);
+	printf("num1 : %d, num2 : %d, num3 : %d", num1, num2, num3);
 
 	return 0;
+}
+
+void Swap3(int* num1, int* num2, int* num3) {
+	int temp = *num2;
+	int temp2 = *num3;
+
+	*num2 = *num1;
+	*num3 = temp;
+	*num1 = temp2;
 }
