@@ -1,49 +1,81 @@
 #include <stdio.h>
 
-// 포인터로 직접 변수 접근 하는 함수 구현
+// 홀수, 짝수 출력 
 /*
 int main() {
-	int num = 3;
+	int input;
+	int arr1[10];
+	int arr2[10];
+	int j = 0;
+	int k = 0;
+	int arrLen = 0;
 
-	int result1 = SquareByValue(num);
-	int result2 = SquareByReference(&num);
+	for (int i = 0; i < 10; i++) {
+		scanf_s("%d", &input);
+		
+		if (input % 2 == 1) {
+			arr1[j] = input;
+			j++;
+		}
+		else {
+			arr2[k] = input;
+			k++;
+		}
+	}
 	
-	printf("result1 : %d, result2 = %d\n", result1, result2);
-	printf("num : %d", num);
+	printf("홀수 출력 : ");
+	while (arrLen < j) {
+		if (arrLen == j - 1) {
+			printf("%d", arr1[arrLen]);
+		}
+		else {
+			printf("%d, ", arr1[arrLen]);
+		}
+		arrLen++;
+	}
+
+	printf("\n");
+	arrLen = 0;
+
+	printf("짝수 출력 : ");
+	while (arrLen < k) {
+		if (arrLen == k - 1) {
+			printf("%d", arr2[arrLen]);
+		}
+		else {
+			printf("%d, ", arr2[arrLen]);
+		}
+		arrLen++;
+	}
 
 	return 0;
-}
-
-int SquareByValue(int num) {
-	return num * num;
-}
-
-int SquareByReference(int* num) {
-	*num = (*num) * (*num);
-	return *num;
 }
 */
 
-// 세 변수에 저장된 값을 바꾸는 함수 구현
-void Swap3(int* num1, int* num2, int* num3);
-
+// 10진수 형태로 입력받아서 2진수로 출력
 int main() {
-	int num1 = 3;
-	int num2 = 6;
-	int num3 = 9;
+	int input = 0;
+	int arr[100];
+	int i = 0;
+	scanf_s("%d", &input);
 
-	Swap3(&num1, &num2, &num3);
+	while (input != 0) {
+		if (input % 2 == 0) {
+			input /= 2;
+			arr[i] = 0;
+		}
+		else if(input % 2 == 1) {
+			input -= 1;
+			input /= 2;
+			arr[i] = 1;
+		}
 
-	printf("num1 : %d, num2 : %d, num3 : %d", num1, num2, num3);
+		i++;
+	}
+
+	for (int j = i - 1; j >= 0; j--) {
+		printf("%d", arr[j]);
+	}
 
 	return 0;
-}
-
-void Swap3(int* num1, int* num2, int* num3) {
-	int temp = *num2;
-	int temp2 = *num3;
-
-	*num2 = *num1;
-	*num3 = temp;
-	*num1 = temp2;
 }
