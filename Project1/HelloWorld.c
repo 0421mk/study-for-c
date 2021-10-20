@@ -1,39 +1,39 @@
 #include <stdio.h>
 
-// 이중 포인터를 이용해 최댓값, 최솟값 구하는 함수 구현
-void MaxAndMin(int* arr, int size, int** maxPtr, int** minPtr) {
-	int* max;
-	int* min;
+int main() {
+	int arr[4][4] = {
+		{1, 2, 3, 4},
+		{5, 6, 7, 8},
+		{9, 10, 11, 12},
+		{13, 14, 15, 16}
+	};
 
-	max = min = &arr[0];
+	int result[4][4];
 
-	for (int i = 0; i < size; i++) {
-		if (*max < arr[i]) {
-			max = &arr[i];
+	for (int j = 0; j < 4; j++) {
+		for (int i = 3; i >= 0; i--) {
+			printf("%d ", arr[i][j]);
 		}
-
-		if (*min > arr[i]) {
-			min = &arr[i];
-		}
+		printf("\n");
 	}
 
-	//*maxPtr 은 주소 자체 값
-	//*(*maxPtr)은 주소에 담겨있는 실제 값
-	*maxPtr = max;
-	*minPtr = min;
-}
+	printf("\n");
 
-int main(void) {
-	int* maxPtr;
-	int* minPtr;
-	int arr[5];
-
-	for (int i = 0; i < 5; i++) {
-		scanf_s("%d", &arr[i]);
+	for (int j = 3; j >= 0; j--) {
+		for (int i = 3; i >= 0; i--) {
+			printf("%d ", arr[j][i]);
+		}
+		printf("\n");
 	}
 
-	MaxAndMin(arr, 5, &maxPtr, &minPtr);
-	printf("최대 : %d, 최소 : %d \n", *maxPtr, *minPtr);
+	printf("\n");
 
+	for (int j = 3; j >= 0; j--) {
+		for (int i = 0; i < 4; i++) {
+			printf("%d ", arr[i][j]);
+		}
+		printf("\n");
+	}
+	
 	return 0;
 }
