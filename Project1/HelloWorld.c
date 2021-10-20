@@ -2,56 +2,55 @@
 #include <stdlib.h>
 #include <time.h>
 
-// 난수를 이용해서 가위바위보 게임 구현
+// 난수를 이용해 strike, ball 게임 구현
 int main() {
 	
 	srand((int)time(NULL));
-	int start = 1;
-	int winner = 0;
-	int draw = 0;
-	int input;
+	
+	int com1 = rand() % 9 + 1;
+	int com2 = rand() % 9 + 1;
+	int com3 = rand() % 9 + 1;
 
-	while(start > 0) {
-		
-		printf("바위는 1, 가위는 2, 보는 3: ");
-		scanf_s("%d", &input);
-		int number = rand() % 3 + 1;
+	int com[3] = { com1, com2, com3 };
 
-		if (input == 1) {
-			printf("당신은 바위 선택, ");
-		}
-		else if (input == 2) {
-			printf("당신은 가위 선택, ");
-		}
-		else if (input == 3) {
-			printf("당신은 보 선택, ");
-		}
+	int input1, input2, input3;
 
-		if (number == 1) {
-			printf("컴퓨터는 바위 선택, ");
-		}
-		else if (number == 2) {
-			printf("컴퓨터는 가위 선택, ");
-		}
-		else if (number == 3) {
-			printf("컴퓨터는 보 선택, ");
-		}
+	int i = 1;
+	int game = 1;
+	while (game > 0) {
+		int strike = 0;
+		int ball = 0;
 
-		if (input == number) {
-			printf("비겼습니다!\n");
-			draw++;
-		}
-		else if (input == 1 && number == 2 || input == 2 && number == 3 || input == 3 && number == 1) {
-			printf("당신이 이겼습니다!\n");
-			winner++;
-		}
-		else {
-			printf("당신이 졌습니다!\n");
-			start = -1;
+		printf("3개의 숫자 선택 : ");
+		scanf_s("%d", &input1);
+		scanf_s("%d", &input2);
+		scanf_s("%d", &input3);
+
+		int input[3] = { input1, input2, input3 };
+
+		for (int j = 0; j < 3; j++) {
+			for (int i = 0; i < 3; i++) {
+				if (j == i) {
+					if (com[i] == input[j]) {
+						strike++;
+					}
+				}
+				else {
+					if (com[i] == input[j]) {
+						ball++;
+					}
+				}
+			}
 		}
 
-		printf("게임의 결과 : %d승, %d무\n", winner, draw);
+		if (strike == 3) {
+			game = -1;
+		}
+
+		printf("%d번째 도전 결과: %dstrike, %dball!!\n", i, strike, ball);
 	}
+	
+	
 
 	return 0;
 }
