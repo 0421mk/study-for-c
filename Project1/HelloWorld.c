@@ -1,24 +1,24 @@
 #include <stdio.h>
+#include <string.h>
 
-// 배열 내 숫자의 총합 구하기
+// strcpy, strcat 함수의 활용
 int main() {
-	char input[100];
+	char str1[20];
+	char str2[20];
+	char str3[40];
 
-	fputs("문자열을 입력해주세요: ", stdout);
-	fgets(input, sizeof(input), stdin);
+	fputs("str1 입력 : ", stdout);
+	fgets(str1, sizeof(str1), stdin);
+	str1[strlen(str1) - 1] = 0;
 
-	int len = strlen(input);
-	input[len - 1] = 0;
-	int total = 0;
+	fputs("str2 입력 : ", stdout);
+	fgets(str2, sizeof(str2), stdin);
+	str2[strlen(str2) - 1] = 0;
 
-	for (int i = 0; i < len; i++) {
-		int ascii = input[i];
-		if (ascii >= 48 && ascii <= 57) {
-			total += ascii - 48;
-		}
-	}
-
-	printf("총합은 : %d 입니다.\n", total);
+	strcpy_s(str3, sizeof(str3), str1);
+	strcat_s(str3, sizeof(str3), str2);
 	
+	printf("str3 : %s", str3);
+
 	return 0;
 }
