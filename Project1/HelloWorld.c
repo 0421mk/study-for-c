@@ -1,34 +1,15 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-// 구조체를 이용하여 직사각형의 넓이와 좌표 출력
-typedef struct point
-{
-	int xpos;
-	int ypos;
-} Point;
-
-int room(Point pos1, Point pos2) {
-	int height;
-	int width;
-
-	width = abs(pos1.xpos - pos2.xpos);
-	height = abs(pos1.ypos - pos2.ypos);
-
-	return width * height;
-}
-
+// 파일 출력 구현하기 Debug 폴더에 mystory.txt 파일
 int main() {
-	Point pos1 = { 0,0 };
-	Point pos2 = { 100,100 };
+	FILE* fp;
+	fopen_s(&fp, "mystory.txt", "wt");
+	
+	fputs("#이름: 최윤우 \n", fp);
+	fputs("#주민번호: 960421-1495888 \n", fp);
+	fputs("#전화번호: 010-4446-5052 \n", fp);
 
-	int roomVal = room(pos1, pos2);
-
-	printf("%d\n", roomVal);
-	printf("%d %d\n", pos1.xpos, pos1.ypos);
-	printf("%d %d\n", pos1.xpos, pos2.ypos);
-	printf("%d %d\n", pos2.xpos, pos1.ypos);
-	printf("%d %d\n", pos2.xpos, pos2.ypos);
+	fclose(fp);
 
 	return 0;
 }
