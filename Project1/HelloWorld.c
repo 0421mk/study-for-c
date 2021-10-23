@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-// 파일 위치 지시자 예제
+// 파일 위치 지시자와 ftell을 이용해 예제 구현
 int main() {
 	FILE* fp;
 	fopen_s(&fp, "text.txt", "wt");
@@ -9,18 +9,21 @@ int main() {
 
 	fopen_s(&fp, "text.txt", "rt");
 	
-	/* SEEK_END test */
-	fseek(fp, -2, SEEK_END);
-	putchar(fgetc(fp));
-
-	/* SEEK_SET test */
-	fseek(fp, 2, SEEK_SET);
-	putchar(fgetc(fp));
-
-	/* SEEK_CUR test */
-	fseek(fp, 2, SEEK_CUR);
-	putchar(fgetc(fp));
+	printf("파일의 크기 : %ld\n", getFileSize(fp));
 	
 	fclose(fp);
 	return 0;
+}
+
+long getFileSize(FILE* fp) {
+	long fpos;
+	long fsize;
+	fpos = ftell(fp);
+
+	fseek(fp, 0, SEEK_END);
+	fsize = ftell(fp);
+
+	fseek(fp, fpos, SEEK_SET);
+
+	return fsize;
 }
