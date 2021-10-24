@@ -1,23 +1,31 @@
 #include <stdio.h>
 
-// 문자열을 입력받아 단어를 기준으로 역출력
+// 정수를 입력받아 배열 출력, 사이즈는 realloc으로 수정 가능
 int main() {
-	char* ptr = (char*)malloc(sizeof(char) * 30);
-	gets_s(ptr, 30);
+	int* ptr = (int*) malloc(sizeof(int) * 5);
+	int size = 0;
 
-	ptr[strlen(ptr)] = 0;
+	while (1) {
+		scanf_s("%d", &ptr[size], sizeof(ptr));
 
-	for (int i = strlen(ptr); i >= 0; i--) {
-		if (ptr[i] == ' ') {
-			// 공백 다음 문자부터 마지막 문자열이 0일때까지 출력
-			printf("%s ", &ptr[i+1]);
-			// 공백을 문자열의 끝으로 만들기
-			// 출력은 문자열의 끝까지 한다
-			ptr[i] = 0;
+		if (ptr[size] == -1) {
+			printf("프로그램을 종료합니다.\n");
+			break;
+		}
+
+		size++;
+
+		if (_msize(ptr) <= sizeof(int) * size) {
+			(int*)realloc(ptr, _msize(ptr) + sizeof(int)*3);
+			printf("_msize(ptr) : %d\n", _msize(ptr));
 		}
 	}
 
-	printf("%s", &ptr[0]);
+	for (int i = 0; i < size; i++) {
+		printf("%d ", ptr[i]);
+	}
+
+	free(ptr);
 	
 	return 0;
 }
