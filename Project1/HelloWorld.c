@@ -1,29 +1,23 @@
 #include <stdio.h>
 
-// 파일 위치 지시자와 ftell을 이용해 예제 구현
+// 문자열을 입력받아 단어를 기준으로 역출력
 int main() {
-	FILE* fp;
-	fopen_s(&fp, "text.txt", "wt");
-	fputs("123456789", fp);
-	fclose(fp);
+	char* ptr = (char*)malloc(sizeof(char) * 30);
+	gets_s(ptr, 30);
 
-	fopen_s(&fp, "text.txt", "rt");
+	ptr[strlen(ptr)] = 0;
+
+	for (int i = strlen(ptr); i >= 0; i--) {
+		if (ptr[i] == ' ') {
+			// 공백 다음 문자부터 마지막 문자열이 0일때까지 출력
+			printf("%s ", &ptr[i+1]);
+			// 공백을 문자열의 끝으로 만들기
+			// 출력은 문자열의 끝까지 한다
+			ptr[i] = 0;
+		}
+	}
+
+	printf("%s", &ptr[0]);
 	
-	printf("파일의 크기 : %ld\n", getFileSize(fp));
-	
-	fclose(fp);
 	return 0;
-}
-
-long getFileSize(FILE* fp) {
-	long fpos;
-	long fsize;
-	fpos = ftell(fp);
-
-	fseek(fp, 0, SEEK_END);
-	fsize = ftell(fp);
-
-	fseek(fp, fpos, SEEK_SET);
-
-	return fsize;
 }
