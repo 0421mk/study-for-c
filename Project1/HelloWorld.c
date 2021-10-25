@@ -1,32 +1,31 @@
 #include <stdio.h>
 
-// fscanf 함수를 이용해 A와 P로 시작하는 단어의 수 구현
+// 두개의 파일 완전히 일치하는지 여부 구현
 
 int main() {
 	FILE* fp;
-	fopen_s(&fp, "wordcnt.txt", "rt");
+	fopen_s(&fp, "file1.txt", "rt");
 
-	char str[10];
-	int Acnt = 0;
-	int Pcnt = 0;
+	FILE* fp2;
+	fopen_s(&fp2, "file2.txt", "rt");
+
+	int check = 0;
 
 	while (feof(fp) != 1) {
-		fscanf_s(fp, "%s", str, sizeof(str));
-
-		if (str[0] == 'A') {
-			Acnt++;
+		if (fgetc(fp) != fgetc(fp2)) {
+			check = -1;
 		}
-		else if (str[0] == 'P') {
-			Pcnt++;
-		}
-
-		printf("%s, 위치 : %d, 파일의 끝 : %d\n", str, ftell(fp), feof(fp));
 	}
 
-	printf("A로 시작하는 단어의 수: %d\n", Acnt);
-	printf("P로 시작하는 단어의 수: %d\n", Pcnt);
+	if (check == 0) {
+		printf("두 개의 파일은 완전히 일치합니다.");
+	}
+	else {
+		printf("두 개의 파일은 완전히 일치하지 않습니다.");
+	}
 
 	fclose(fp);
+	fclose(fp2);
 
 	return 0;
 }
