@@ -8,9 +8,27 @@ typedef struct person {
 // 전화번호 관리 프로그램 구현
 int main() {
 	Person people[100];
+		
+	// 파일 읽기, 공백으로 구분
+	FILE* fp;
+	fopen_s(&fp, "people.txt", "rt");
+
+	int ret;
+	int index = 0;
+
+	while (1) {
+		ret = fscanf_s(fp, "%s %s", people[index].name, sizeof(people[index].name), people[index].number, sizeof(people[index].number));
+		if (ret == EOF) {
+			break;
+		}
+		index++;
+	}
+
+	fclose(fp);
 
 	int command;
 	int size = 0;
+	size = index;
 
 	while (1) {
 		printf("명령어 : ");
@@ -96,6 +114,17 @@ int main() {
 		}
 		else if (command == '5') {
 			printf("시스템을 종료합니다.\n");
+			
+			// 파일로 저장
+			FILE* fp;
+			fopen_s(&fp, "people.txt", "wt");
+
+			for (int i = 0; i < size; i++) {
+				fprintf(fp, "%s %s ", people[i].name, people[i].number);
+			}
+
+			fclose(fp);
+
 			break;
 		}
 		else {
