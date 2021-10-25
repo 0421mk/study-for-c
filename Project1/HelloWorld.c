@@ -1,45 +1,46 @@
 #include <stdio.h>
 
-typedef struct information {
-	char name[40];
-	char title[40];
-	int page;
-} Info;
+typedef struct number {
+	double c;
+	double i;
+} Number;
 
-// 구조체 포인터 배열
-// 동적할당으로 배열을 만들어도 [i]로 접근 가능
+Number add(double c1, double i1, double c2, double i2);
+Number mul(double c1, double i1, double c2, double i2);
 
 int main() {
-	Info *info;
-	info = (Info*)malloc(sizeof(Info)*3);
+	Number num1;
+	Number num2;
 	
-	printf("도서 정보 입력\n");
-	for (int i = 0; i < 3; i++) {
-		printf("저자: ");
-		fgets(info[i].name, sizeof(info[i].name), stdin);
-		info[i].name[strlen(info[i].name) - 1] = 0;
+	scanf_s("%lf %lf", &num1.c, &num1.i);
+	scanf_s("%lf %lf", &num2.c, &num2.i);
 
-		printf("제목: ");
-		fgets(info[i].title, sizeof(info[i].title), stdin);
-		info[i].title[strlen(info[i].title) - 1] = 0;
+	Number result1;
+	Number result2;
 
-		printf("페이지 수: ");
-		scanf_s("%d", &info[i].page, sizeof(info[i].page));
+	result1 = add(num1.c, num1.i, num2.c, num2.i);
+	result2 = mul(num1.c, num1.i, num2.c, num2.i);
 
-		// getchar()가 \n이면 반복문 break; 즉 getchar()을 읽고 break 시킴
-		while (getchar() != '\n');
-	}
-	
-	printf("도서 정보 출력\n");
-	
-	for (int i = 0; i < 3; i++) {
-		printf("book %d\n", i + 1);
-		printf("저자 : %s\n", info[i].name);
-		printf("제목 : %s\n", info[i].title);
-		printf("페이지 수 : %d\n", info[i].page);
-	}
-
-	free(info);
+	printf("합의 결과] 실수: %lf, 허수: %lf\n", result1.c, result1.i);
+	printf("곱의 결과] 실수: %lf, 허수: %lf\n", result2.c, result2.i);
 
 	return 0;
+}
+
+Number add(double c1, double i1, double c2, double i2) {
+	Number result;
+
+	result.c = c1 + c2;
+	result.i = i1 + i2;
+
+	return result;
+}
+
+Number mul(double c1, double i1, double c2, double i2) {
+	Number result;
+
+	result.c = (c1*c2) - (i1*i2);
+	result.i = (i1 * c2) + (c2 * i1);
+
+	return result;
 }
